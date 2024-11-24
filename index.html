@@ -24,35 +24,35 @@
     
     <script>
         // Initialize map
-      var map = L.map('map', { center: [40, 155], maxZoom: 6, zoom: 5 });
-
-      var url_to_geotiff_file = "https://georaster-layer-for-leaflet.s3.amazonaws.com/Blue-Earth-Bathymetry-COG.tif";
-
-      parseGeoraster(url_to_geotiff_file).then(georaster => {
-        console.log("georaster:", georaster);
-
-        /*
-            GeoRasterLayer is an extension of GridLayer,
-            which means can use GridLayer options like opacity.
-
-            Just make sure to include the georaster option!
-
-            http://leafletjs.com/reference-1.2.0.html#gridlayer
-        */
-        var scale = chroma.scale(['black', 'cyan']).domain([-11022, 0]);
-
-        var layer = new GeoRasterLayer({
-            attribution: "GEBCO & Tom Patterson",
-            georaster: georaster,
-            opacity: 0.75,
-            resolution: 64,
-            pixelValuesToColorFn: function (values) {
-              const elevation = values[0];
-              if (elevation > 0) return "rgb(34, 15, 50)";
-              return scale(elevation).hex();
-            }
-        });
-        layer.addTo(map);
+          var map = L.map('map', { center: [40, 155], maxZoom: 6, zoom: 5 });
+    
+          var url_to_geotiff_file = "https://georaster-layer-for-leaflet.s3.amazonaws.com/Blue-Earth-Bathymetry-COG.tif";
+    
+          parseGeoraster(url_to_geotiff_file).then(georaster => {
+            console.log("georaster:", georaster);
+    
+            /*
+                GeoRasterLayer is an extension of GridLayer,
+                which means can use GridLayer options like opacity.
+    
+                Just make sure to include the georaster option!
+    
+                http://leafletjs.com/reference-1.2.0.html#gridlayer
+            */
+            var scale = chroma.scale(['black', 'cyan']).domain([-11022, 0]);
+    
+            var layer = new GeoRasterLayer({
+                attribution: "GEBCO & Tom Patterson",
+                georaster: georaster,
+                opacity: 0.75,
+                resolution: 64,
+                pixelValuesToColorFn: function (values) {
+                  const elevation = values[0];
+                  if (elevation > 0) return "rgb(34, 15, 50)";
+                  return scale(elevation).hex();
+                }
+            });
+            layer.addTo(map);
 
         function showMarkerInfo(item) {
         // Create content for the popup
