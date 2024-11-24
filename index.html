@@ -26,9 +26,9 @@
         
         var map = L.map('map').setView([43.75, -5.23], 5); // Change to your desired coordinates
         // Initialize map
-        L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-            attribution: 'Map data: &copy; OpenStreetMap contributors, SRTM | Map style: &copy; OpenTopoMap',
-            maxZoom: 17
+        L.tileLayer('https://www.gebco.net/data_and_products/gebco_web_services/2020/mapserv?', {
+            attribution: '&copy; GEBCO Compilation Group',
+            maxZoom: 8,
         }).addTo(map);
 
         function showMarkerInfo(item) {
